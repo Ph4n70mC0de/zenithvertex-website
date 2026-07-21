@@ -1,17 +1,47 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { fetchRepos } from '../lib/github';
 
+const repos: Record<string, unknown>[] = await fetchRepos();
+const featured = repos.slice(0, 6);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="ZenithVertex"
+  description="Building the future of web, AI, and clean architecture."
+>
+  <Hero
+    tagline="Building the future of web, AI, and clean architecture."
+    ctaLabel="View our projects"
+    ctaHref="/projects"
+  />
+
+  <section class="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+    <h2 class="text-2xl font-bold text-[--color-text]">Featured projects</h2>
+    <p class="mt-2 text-[--color-text-muted]">
+      Open-source work from the ZenithVertex organization.
+    </p>
+    <ul class="mt-8 grid gap-6 sm:grid-cols-2">
+      {featured.map((repo) => (
+        <ProjectCard
+          title={(repo.name as string) ?? 'Untitled'}
+          description={(repo.description as string) || 'No description provided.'}
+          href={(repo.html_url as string) ?? '#'}
+          stars={(repo.stargazers_count as number) ?? 0}
+          language={(repo.language as string) ?? 'Unknown'}
+          topics={((repo.topics as string[]) ?? [])}
+        />
+      ))}
+    </ul>
+    <div class="mt-10 text-center">
+      <a
+        href="/projects"
+        class="text-sm font-semibold text-[--color-primary] hover:underline"
+      >
+        View all {repos.length} projects →
+      </a>
+    </div>
+  </section>
+</BaseLayout>
