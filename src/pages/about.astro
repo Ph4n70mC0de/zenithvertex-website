@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About" description="ZenithVertex mission and focus areas.">
+  <section class="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-bold text-[--color-text]">About ZenithVertex</h1>
+    <p class="mt-4 text-[--color-text-muted]">
+      ZenithVertex is an open-source organization focused on building high-quality software across three core areas.
+    </p>
+
+    <h2 class="mt-10 text-xl font-semibold text-[--color-text]">Our focus</h2>
+    <ul class="mt-4 grid gap-6 sm:grid-cols-2">
+      <li class="rounded-lg border border-[--color-border] bg-white p-6 shadow-sm">
+        <h3 class="text-lg font-semibold text-[--color-text]">Web Development</h3>
+        <p class="mt-2 text-sm text-[--color-text-muted]">
+          Modern, accessible, and performant web experiences built with open standards and mainstream frameworks.
+        </p>
+      </li>
+      <li class="rounded-lg border border-[--color-border] bg-white p-6 shadow-sm">
+        <h3 class="text-lg font-semibold text-[--color-text]">Artificial Intelligence</h3>
+        <p class="mt-2 text-sm text-[--color-text-muted]">
+          Practical AI tooling and integrations that make developers more productive without adding bloat.
+        </p>
+      </li>
+      <li class="rounded-lg border border-[--color-border] bg-white p-6 shadow-sm">
+        <h3 class="text-lg font-semibold text-[--color-text]">Clean Architecture</h3>
+        <p class="mt-2 text-sm text-[--color-text-muted]">
+          Maintainable, testable, and well-structured codebases that scale with contributors and feature sets.
+        </p>
+      </li>
+    </ul>
+
+    <h2 class="mt-10 text-xl font-semibold text-[--color-text]">Get involved</h2>
+    <p class="mt-2 text-[--color-text-muted]">
+      We welcome contributors of all backgrounds. Browse our repositories, file issues, or join the discussion on GitHub.
+    </p>
+    <div class="mt-4">
+      <a
+        href="https://github.com/ZenithVertex"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block rounded-lg bg-[--color-primary] px-5 py-3 font-semibold text-white shadow-sm hover:bg-[--color-primary-dark]"
+      >
+        View our GitHub repos
+      </a>
+    </div>
+  </section>
+</BaseLayout>
