@@ -12,7 +12,6 @@ updates:
       - Ph4n70mC0de
     commit-message:
       prefix: "chore"
-      prefix-development: "chore"
       include: "scope"
 
   - package-ecosystem: github-actions
@@ -27,5 +26,4 @@ updates:
       - Ph4n70mC0de
     commit-message:
       prefix: "chore"
-      prefix-development: "chore"
       include: "scope"
