@@ -1,0 +1,58 @@
+name: PR Checks and Formatting
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+  issue_comment:
+    types: [created]
+
+jobs:
+  label-pr:
+    name: Label Pull Request
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Auto-label PR by branch pattern
+        uses: actions/labeler@v5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          sync-labels: true
+
+  title-validation:
+    name: Validate PR Title
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Enforce Conventional Commits
+        uses: veertuana/action-conventional-commits@v1
+        with:
+          conventional-commits-version: v1.0.0
+
+  stale-management:
+    name: Manage Stale Issues and PRs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          stale-issue-message: >
+            This issue has been automatically marked as stale because it has not had
+            recent activity. It will be closed in 14 days if no further activity occurs.
+            Thank you for your contribution!
+          stale-pr-message: >
+            This pull request has been automatically marked as stale because it has not had
+            recent activity. It will be closed in 14 days if no further activity occurs.
+            Thank you for your contribution!
+          days-before-stale: 60
+          days-before-close: 14
+          stale-issue-label: "stale"
+          stale-pr-label: "stale"
+          exempt-issue-labels: "pinned,security,in-progress"
+          exempt-pr-labels: "pinned,security,in-progress"
+          operations-per-run: 100
